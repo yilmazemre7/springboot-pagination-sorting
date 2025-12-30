@@ -12,6 +12,7 @@ import com.emrecanyilmaz.model.Employee;
 import com.emrecanyilmaz.service.IEmployeeService;
 import com.emrecanyilmaz.utils.RestPageableEntity;
 import com.emrecanyilmaz.utils.RestPageableRequest;
+import com.emrecanyilmaz.utils.RestRootEntity;
 
 @Controller
 @RequestMapping("/rest/api/employee")
@@ -22,9 +23,10 @@ public class RestEmployeeController extends RestBaseController implements IRestE
 
 	@GetMapping("/list/pageable")
 	@Override
-	public RestPageableEntity<DtoEmployee> findAllPageable(RestPageableRequest request) {
+	public RestRootEntity<RestPageableEntity<DtoEmployee>> findAllPageable(RestPageableRequest request) {
 		 Page<Employee> page = employeeService.findAllPageable(toPageable(request));
-		 return toPageableResponse(page, employeeService.toDTOList(page.getContent()));
+		 RestRootEntity<RestPageableEntity<DtoEmployee>> ok = ok(toPageableResponse(page, employeeService.toDTOList(page.getContent())));
+		return ok;
 	}
 	
 
