@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.emrecanyilmaz.controller.IRestEmployeeController;
+import com.emrecanyilmaz.dto.DtoEmployee;
 import com.emrecanyilmaz.model.Employee;
 import com.emrecanyilmaz.service.IEmployeeService;
+import com.emrecanyilmaz.utils.RestPageableEntity;
 import com.emrecanyilmaz.utils.RestPageableRequest;
 
 @Controller
@@ -20,8 +22,9 @@ public class RestEmployeeController extends RestBaseController implements IRestE
 
 	@GetMapping("/list/pageable")
 	@Override
-	public Page<Employee> findAllPageable(RestPageableRequest request) {
-		return employeeService.findAllPageable(toPageable(request));
+	public RestPageableEntity<DtoEmployee> findAllPageable(RestPageableRequest request) {
+		 Page<Employee> page = employeeService.findAllPageable(toPageable(request));
+		 return toPageableResponse(page, employeeService.toDTOList(page.getContent()));
 	}
 	
 

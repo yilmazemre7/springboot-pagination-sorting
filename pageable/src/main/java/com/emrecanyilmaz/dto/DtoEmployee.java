@@ -3,7 +3,7 @@ package com.emrecanyilmaz.dto;
 import lombok.Data;
 
 @Data
-public class DtoPersonel {
+public class DtoEmployee {
 	
 	private Long id;
 	
