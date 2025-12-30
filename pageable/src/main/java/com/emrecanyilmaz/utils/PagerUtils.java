@@ -32,6 +32,7 @@ public class PagerUtils {
 	
 	public <T> RestPageableEntity<T> toPageableResponse(Page<?> page, List<T> content){
 		RestPageableEntity<T> pageableEntity = new RestPageableEntity<>();
+		pageableEntity.setContent(content);
 		pageableEntity.setPageNumber(page.getPageable().getPageNumber());
 		pageableEntity.setPageSize(page.getPageable().getPageSize());
 		pageableEntity.setTotalElements(page.getTotalElements());
